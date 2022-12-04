@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <title> Regenerate AI
+        </title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+            body {
+                background-color: #2B3A55;
+            }
+            h1 {
+                margin: 82px auto 15px auto;
+                text-align: center;
+                font-size: 128px;
+                font-family: 'Josefin Sans', sans-serif;
+                color: #E8C4C4;
+            }
+            h2 {
+                margin: 0px auto 120px auto;
+                text-align: center;
+                font-size: 60px;
+                font-family: 'Josefin Sans', sans-serif;
+                color: white;
+            }
+            input {
+                background-color : #BFD6FF;
+                flex-basis: 90%;
+                border-radius: 20px;
+                border-color: #E8C4C4;
+                border-width: 6px;
+            }
+            select {
+                background-color: #E8C4C4;
+                border-radius: 10px;
+                flex-basis: 60%;
+                font-family: 'Josefin Sans', sans-serif;
+                font-size: 36px;
+                text-align: center;
+            }
+            button {
+                background-color: #E8C4C4;
+                border-radius: 10px;
+                flex-basis: 40%;
+                font-family: 'Josefin Sans', sans-serif;
+                font-size: 36px;
+                text-align: center;
+            }
+            #plotDiv {
+                flex-basis: 40%;
+                background-color: #BFD6FF;
+                border-radius: 20px;
+                border-color: #E8C4C4;
+                border-width: 6px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1> <span style="color: CE7777;">re</span>generate</h1>
+            <h2>Information Visualized.</h2>
+            <div style="display: flex; flex-direction: row; height: 80%; margin: 75px; gap: 40px;">
+                <div style="display: flex; flex-direction: column; flex-basis: 60%; gap: 40px;">
+                    <input type="text" id="inputText" name="inputText">
+                    <div style="display: flex; flex-direction: row; flex-basis: 10%; gap: 40px;">
+                        <select name="plotType" id="plotType">
+                            <option value="bar">Bar</option>
+                            <option value="pie">Pie</option>
+                            <option value="line">Line</option>
+                            <option value="scatter">Scatter</option>
+                        </select>
+                        <button type="button" onclick="generate()">Generate</button>
+                    </div>
+                </div>
+                <div id="plotDiv">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
