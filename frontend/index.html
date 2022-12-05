@@ -1,0 +1,126 @@
+<html>
+
+<head>
+    <title> Regenerate AI
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+        body {
+            background-color: #2B3A55;
+        }
+
+        h1 {
+            margin: 82px auto 15px auto;
+            text-align: center;
+            font-size: 128px;
+            font-family: 'Josefin Sans', sans-serif;
+            color: #E8C4C4;
+        }
+
+        h2 {
+            margin: 0px auto 120px auto;
+            text-align: center;
+            font-size: 60px;
+            font-family: 'Josefin Sans', sans-serif;
+            color: white;
+        }
+
+        textarea {
+            background-color: #BFD6FF;
+            flex-basis: 80%;
+            border-radius: 20px;
+            border-color: #E8C4C4;
+            border-width: 6px;
+            padding: 20px;
+            font-family: 'Josefin Sans', sans-serif;
+            color: #848484;
+        }
+
+        select {
+            background-color: #E8C4C4;
+            border-radius: 10px;
+            flex-basis: 10%;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 36px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #E8C4C4;
+            border-radius: 10px;
+            flex-basis: 10%;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 36px;
+            text-align: center;
+        }
+
+        #plotDiv {
+            background-color: #BFD6FF;
+            border-radius: 20px;
+            border-color: #E8C4C4;
+            border-width: 6px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1> <span style="color: CE7777;">re</span>generate</h1>
+        <h2>Information Visualized.</h2>
+        <div style="margin: 75px;">
+            <div style="display: flex; flex-direction: row; gap: 20px; height: 80%;">
+                <textarea type="text" id="inputText" name="inputText"></textarea>
+                <div style="display: flex; flex-direction: column; flex-basis: 20%; gap: 10px;">
+                    <select name="plotType" id="plotType">
+                        <option value="graph">Graph</option>
+                        <option value="timeline">Timeline</option>
+                    </select>
+                    <button type="button" onclick="generate()">Generate</button>
+                </div>
+            </div>
+            <div id="plotDiv" style="margin-top: 20px; height: 80%;">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function generate() {
+        const inputText = document.getElementById('inputText').value;
+        const plotType = document.getElementById('plotType').value;
+        fetch('http://127.0.0.1:7000/generate', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                input_text: inputText,
+                plot_type: plotType
+            })
+        })
+            .then(response => response.json())
+            .then(response => {
+                let plotType = response['infographicType'];
+                if (plotType == 'img') {
+                    document.getElementById('plotDiv').innerHTML = '<img src="' + response['infographicId'] + '">'
+                } else {
+                    document.getElementById('plotDiv').innerHTML = response['infographicId']
+                }
+            })
+            .catch(error => console.log(error));
+    }
+</script>
+
+</html>
